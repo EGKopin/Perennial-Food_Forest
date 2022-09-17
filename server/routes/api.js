@@ -4,12 +4,24 @@ const perennialController = require('../controllers/perennialControllers');
 
 const router = express.Router();
 
-router.get('/perennial', perennialController.getPlants, (req, res) => {
-    return res.status(200).json({});
+router.get('/', perennialController.getAllPlants, (req, res) => {
+  return res.status(200).json(res.locals.plant)
 });
 
-router.post('/perennial', perennialController.addPlants, (req, res) => {
-    return res.status(200).json({});
+router.get('/:id', perennialController.getPlant, (req, res) => {
+    return res.status(200).json(res.locals.plant)
+});
+
+router.post('/', perennialController.addPlants, (req, res) => {
+    return res.status(200).json(res.locals.plant)
+});
+
+router.patch('/:id', perennialController.patchPlant, (req, res) => {
+  return res.status(200).json(res.locals.plant)
+});
+
+router.delete('/:id', perennialController.deletePlant, (req, res) => {
+  return res.status(200).json(res.locals.deleted)
 });
 
 module.exports = router;
