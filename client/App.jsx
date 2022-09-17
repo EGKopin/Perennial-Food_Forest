@@ -31,13 +31,12 @@ class App extends Component {
 
 getPlant(){
   console.log('click');
-  fetch('http://localhost:3000/')
+  fetch('http://localhost:3000/perennial')
     .then(res => res.json())
     .then(json => {
-        console.log(json);
-       
-})
-
+        console.log(json)
+      })
+    .catch ((err) => console.log('error in getPlant', err))
 }
 
 render() {

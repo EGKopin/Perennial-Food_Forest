@@ -13,11 +13,17 @@ const apiRouter = require('./routes/api')
  app.use(express.json());
  app.use(express.urlencoded({ extended: true }));
 
+/* to deal with CORS issue  */
+ app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
  /* Server test at intial endpoint
  */
 
 app.get('/', (req,res) => {
-    res.send('Hello World! How are you?')
+    res.json('Hello World! How are you?')
 });
 
 /*
