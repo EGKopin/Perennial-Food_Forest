@@ -1,5 +1,20 @@
+.plantDisplay {
+  background-color: aqua;
+  display: flex;
+}
+
 .plant {
   background-color: bisque;
   width: 250px;
   height: 250px;
+  padding-left: 10px;
+  border: 1px solid red;
+  border-radius: 20px;
+
+}
+
+.plantDetails {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }

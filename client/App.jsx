@@ -21,7 +21,7 @@ class App extends Component {
 
     this.state = {
       _id: [],
-      type: {}
+      plants: {}
     };
     this.getPlant = this.getPlant.bind(this);
 }
@@ -33,8 +33,8 @@ getPlant(){
   console.log('click');
   fetch('http://localhost:3000/perennial')
     .then(res => res.json())
-    .then(json => {
-        console.log(json)
+    .then(plants => {
+      this.setState({plants: plants})
       })
     .catch ((err) => console.log('error in getPlant', err))
 }
@@ -44,8 +44,11 @@ render() {
     <div className="router">
       <main>
         <Routes>
-          <Route exact path='/' element={<PlantDisplay 
+          <Route exact path='/' element={
+          
+          <PlantDisplay 
           getPlant={this.getPlant}
+          plantList={this.state.plants}
           />}/>
         </Routes>
       </main>
