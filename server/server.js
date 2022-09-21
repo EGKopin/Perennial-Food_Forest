@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 
 const app = express();
 
@@ -6,6 +7,8 @@ const port = 3000;
 
 const apiRouter = require('./routes/api')
 
+//handle all cors issues with the npm package
+app.use(cors());
 /**
  * handle parsing request body
  */
@@ -34,7 +37,7 @@ app.use('/perennial', apiRouter);
 
 
 // catch-all route handler for any requests to an unknown route
-app.use((req,res) => res.status(404).send('The plant you are looking for doesn\'t exist'));
+app.use((req,res) => res.status(404).json('The plant you are looking for doesn\'t exist'));
 
 //global error handler
 app.use((err, req, res, next) => {

@@ -1,20 +1,18 @@
 /**
  * ************************************
  *
- * @module  plantDisplay
+ * @module  MainContainer
  * @author
  * @date
  * @description presentation component that renders a single box for each plant
  *
  * ************************************
  */
-
  import React from 'react';
  import AddPlant from './AddPlant.jsx';
  import Plant from './Plant.jsx';
- import EditPlant from './EditPlant.jsx';
 
- const PlantDisplay = props => {
+ const MainContainer = props => {
   const { plantList } = props;
   const plants = [];
   for (let i = 0; i < props.plantList.length; i++){
@@ -42,18 +40,12 @@
 
     return (
      <div className="mainContainer">
-        <div className='header'>
-        {/* <button onClick={props.getPlant}>Fetch Those Plants!</button> */}
-        {/* <button onClick={props.addPlant}>Add Plant</button> */}
-        <AddPlant 
-        getPlant={props.getPlant}
-        />
-        </div>
-        <div className='plantDisplay'>
-        {plants}   
-        </div>
+      <button onClick={props.getPlant}>fetch plant</button>
+      {/* <button onClick={props.addPlant}>Add Plant</button> */}
+       {plants}
+       <AddPlant />
      </div>
    );
  }
 
- export default PlantDisplay;
+ export default MainContainer;

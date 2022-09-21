@@ -1,15 +1,26 @@
+.mainContainer {
+  /* background-color: black; */
+}
+
+.header {
+  background-color: azure;
+}
+
 .plantDisplay {
-  background-color: aqua;
+  background-color: rgb(142, 196, 166);
   display: flex;
+  flex-wrap: wrap;
+
 }
 
 .plant {
-  background-color: bisque;
+  background-color: rgb(226, 240, 235);
   width: 250px;
-  height: 250px;
+  height: 300px;
   padding-left: 10px;
-  border: 1px solid red;
+  border: 1px solid rgb(142, 178, 255);
   border-radius: 20px;
+  margin: 2px;
 
 }
 
@@ -17,4 +28,11 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.plantButton {
+  border: 1px solid black;
+  border-radius: 6px;
+  margin: 5px;
+  padding: 3px 10px;
 }

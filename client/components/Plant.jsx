@@ -9,10 +9,15 @@
  * ************************************
  */
 
- import React from 'react';
+ import React, {useState} from 'react';
+ import Modal from './EditPlant.jsx'
 
  const Plant = props => {
-  const { name, type, planted_date, zones, watering, size, self_pollinating, scientific_name, light_exposure, hardiness_tempF, fruiting_branch } = props;
+  const { id , name, type, planted_date, zones, watering, size, self_pollinating, scientific_name, light_exposure, hardiness_tempF, fruiting_branch } = props;
+
+  const [openModal, setOpenModal] = useState(false); //modal is initally closed
+  
+
     return (
      <div className="plant">
       <p>
@@ -30,6 +35,16 @@
         <li>Light Exposure: {light_exposure}</li>
         <li>Hardiness Temperature: {hardiness_tempF}</li>
       </ul>
+      <p>
+      <button className='plantButton' onClick={() => {
+        setOpenModal(true);
+      }}  id={id}>Edit in modal</button>
+      <button className='plantButton' onClick={props.deletePlant} id={id}>Delete</button>
+      </p>
+       {openModal && <Modal 
+       closeModal={setOpenModal}
+       />}
+       {/* if openModal is true, it will auto load the modal?, uses Javascript hence curlybrackets*/}
      </div>
    );
  }
