@@ -22,7 +22,7 @@ class App extends Component {
 
     this.state = {
       _id: [],
-      plants: {},
+      plants: [],
       currentID: null
     };
     this.getPlant = this.getPlant.bind(this);
@@ -42,6 +42,7 @@ getPlant(){
   fetch('http://localhost:3000/perennial')
     .then(res => res.json())
     .then(plants => {
+      plants.sort((a,b) => a._id - b._id)
       this.setState({plants: plants})
       })
     .catch ((err) => console.log('error in getPlant', err))

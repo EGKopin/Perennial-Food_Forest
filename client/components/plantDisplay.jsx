@@ -9,16 +9,17 @@
  * ************************************
  */
 
- import React from 'react';
+ import React, { useState } from 'react';
  import AddPlant from './AddPlant.jsx';
  import Plant from './Plant.jsx';
- import EditPlant from './EditPlant.jsx';
 
  const PlantDisplay = props => {
   const { plantList } = props;
+  const [openModal, setOpenModal] = useState(false); //modal is initally closed
+
   const plants = [];
   for (let i = 0; i < props.plantList.length; i++){
-    const { _id, name, type, planted_date, zones, watering, size, self_pollinating, scientific_name, light_exposure, hardiness_tempF, fruiting_branch } = plantList[i];
+    const { _id, name, type, planted_date, zones, watering, size, self_pollinating, scientific_name, light_exposure, hardiness_tempf, fruiting_branch } = plantList[i];
     plants.push(
       <Plant
         id = {_id}
@@ -31,7 +32,7 @@
         self_pollinating = {self_pollinating}
         scientific_name = {scientific_name}
         light_exposure = {light_exposure}
-        hardiness_tempF = {hardiness_tempF}
+        hardiness_tempf = {hardiness_tempf}
         fruiting_branch = {fruiting_branch}
         key = {`Plant #${i}`}
         editPlant={props.editPlant}
@@ -43,11 +44,14 @@
     return (
      <div className="mainContainer">
         <div className='header'>
-        {/* <button onClick={props.getPlant}>Fetch Those Plants!</button> */}
-        {/* <button onClick={props.addPlant}>Add Plant</button> */}
-        <AddPlant 
-        getPlant={props.getPlant}
-        />
+         <h1>Perennial Food Forest</h1> 
+        <button className='plantButton' onClick={() => {setOpenModal(true);
+          }}>Add Plant</button>
+            {openModal && <AddPlant 
+            getPlant={props.getPlant}
+            closeModal={setOpenModal}
+            />
+            }
         </div>
         <div className='plantDisplay'>
         {plants}   

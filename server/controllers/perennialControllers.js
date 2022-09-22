@@ -48,16 +48,15 @@ perennialController.getPlant = async (req, res, next) => {
 
 //WORKS!!! First to make it happen, baby
 perennialController.addPlants = async (req, res, next) => {
-  const { type, name } = req.body; 
+  const { type, name, scientific_name, light_exposure, watering, zones, hardiness_tempf, self_pollinating, fruiting_branch, size, planted_date } = req.body; 
   try {
     const queryString = `
-    INSERT INTO perennials (type, name)
-    VALUES ($1, $2)
+    INSERT INTO perennials (type, name, scientific_name, light_exposure, watering, zones, hardiness_tempf, self_pollinating, fruiting_branch, size, planted_date)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
     RETURNING *
     `
     const params = [
-      type,
-      name
+      type, name, scientific_name, light_exposure, watering, zones, hardiness_tempf, self_pollinating, fruiting_branch, size, planted_date
     ];
 
     const result = await db.query(queryString, params);
@@ -77,11 +76,11 @@ perennialController.addPlants = async (req, res, next) => {
 
 perennialController.patchPlant = async (req, res, next) => {
   const { id } = req.params;
-  const { type, name, zones} = req.body;
+  const { type, name, scientific_name, light_exposure, watering, zones, hardiness_tempf, self_pollinating, fruiting_branch, size, planted_date } = req.body;
   try {
     const queryString = `
     UPDATE perennials
-    SET type = '${type}', zones = '${zones}'
+    SET type = '${type}', name='${name}', scientific_name='${scientific_name}',light_exposure='${light_exposure}', watering='${watering}', zones='${zones}', hardiness_tempf='${hardiness_tempf}', self_pollinating='${self_pollinating}', fruiting_branch='${fruiting_branch}', size='${size}', planted_date='${planted_date}'
     WHERE _id = ${id}
     RETURNING *
     `
