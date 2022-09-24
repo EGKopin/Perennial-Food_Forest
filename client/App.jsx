@@ -23,10 +23,12 @@ class App extends Component {
     this.state = {
       _id: [],
       plants: [],
-      currentID: null
+      currentID: null,
+      currentDetails: null,
     };
     this.getPlant = this.getPlant.bind(this);
     this.deletePlant = this.deletePlant.bind(this);
+    this.getDetails = this.getDetails.bind(this);
 }
 
 componentDidMount(){
@@ -47,6 +49,18 @@ getPlant(){
       })
     .catch ((err) => console.log('error in getPlant', err))
 }
+
+getDetails(e){
+    fetch(`http://localhost:3000/perennial/${e.target.id}`)
+    .then(res => res.json())
+    .then(details => {
+      details.sort((a,b) => a._id - b._id);
+      console.log(details);
+      this.setState({currentDetails: details})
+      })
+    .catch ((err) => console.log('error in getDetails', err))
+}
+
 
 editPlant(e){
  console.log(e.target.id)
@@ -75,6 +89,8 @@ editPlant(e){
 deletePlant(event){
   console.log('delete plant', event.target.id)
   const toDelete = event.target.id
+  const confirm = window.confirm('Do you really want to delete all your hard work?')
+  if (confirm){
   fetch(`http://localhost:3000/perennial/${toDelete}`, {
     method:'DELETE',
     headers: {
@@ -87,6 +103,7 @@ deletePlant(event){
       // this.getPlant()
     })
   .catch ((err) => console.log('error in editPlant', err))
+  }
 }
 
 
@@ -102,6 +119,8 @@ render() {
             deletePlant={this.deletePlant}
             plantList={this.state.plants}
             addPlant={this.addPlant}
+            getDetails={this.getDetails}
+            detailList={this.state.currentDetails}
             />
         }
           />

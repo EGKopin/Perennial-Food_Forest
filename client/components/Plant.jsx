@@ -11,18 +11,19 @@
 
  import React, {useState} from 'react';
 import EditPlant from './EditPlant.jsx';
-//  import Modal from './EditPlant.jsx'
+import DetailsContainer from './DetailsContainer.jsx';
 
  const Plant = props => {
-  const { id , name, type, planted_date, zones, watering, size, self_pollinating, scientific_name, light_exposure, hardiness_tempf, fruiting_branch } = props;
+  const { id , name, type, planted_date, zones, watering, size, self_pollinating, scientific_name, light_exposure, hardiness_tempf, fruiting_branch, detailList } = props;
 
   const [openModal, setOpenModal] = useState(false); //modal is initally closed
+  const [openDetailModal, setOpenDetailModal] = useState(false); //modal is initally closed
   
 
     return (
      <div className="plant">
       <p>
-        <label className='plantName'>Plant Name: {name} </label>        
+        <label className='plantName'>{name}</label>        
       </p>
       <ul className='plantDetails'>
         <li><label>Scientific Name:</label><i>{scientific_name}</i></li>
@@ -37,16 +38,32 @@ import EditPlant from './EditPlant.jsx';
         <li><label>Hardiness Temperature:</label> {hardiness_tempf}</li>
       </ul>
       <p>
-      <button className='plantButton' onClick={() => {
+      <button className='editButton' onClick={() => {
         setOpenModal(true);
-      }}  id={id}>Edit in modal</button>
-      <button className='plantButton' onClick={props.deletePlant} id={id}>Delete</button>
+        }}  id={id}>Edit</button>
+
+      <button className = 'detailsButton' onClick={() => {
+        setOpenDetailModal(true);
+        }} id={id}>Details</button>
+
+      <button className='deleteButton' onClick={props.deletePlant} id={id}>Delete</button>
+
       </p>
+      {/* Details modal information */}
+      {openDetailModal && <DetailsContainer
+      // detailList={detailList}
+      // getDetails={props.getDetails}
+      name={name}
+      type={type}
+      id={id}
+      closeDetailModal={setOpenDetailModal}
+      />}
+
+      {/* Edit Plant modal information */}
        {openModal && <EditPlant
        plantDetails={props} 
        closeModal={setOpenModal}
        />}
-       {/* if openModal is true, it will auto load the modal?, uses Javascript hence curlybrackets*/}
      </div>
    );
  }

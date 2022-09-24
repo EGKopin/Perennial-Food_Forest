@@ -4,16 +4,25 @@ body {
   margin: 0;   
   /* Remove body margins */
   padding-top: 0px;
-  background-color: rgb(205, 243, 222);
+  background-color: #99CC99;
 }
 
 .header {
-  background-color: azure;
+  background-image: url(./assets/logo.png);
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: right;
+  height: 80px;
+  margin-top: -20px;
+  border-bottom: 3px solid #003300;
 }
 
 .header h1 {
   font-family: 'Lobster', cursive;
-  margin-left: 20px;
+  font-size: 3em;
+  padding-top: 10px;
+  text-align: center;
+  color: #003300;
 }
 
 .plantDisplay {
@@ -24,19 +33,20 @@ body {
 }
 
 .plant {
-  background-color: rgb(226, 240, 235);
+  background-color: #CCFFCC;
   width: 400px;
   height: 300px;
   padding-left: 10px;
-  border: 1px solid rgb(142, 178, 255);
+  border: 1px solid #003300;
   border-radius: 20px;
-  margin: 2px;
+  margin: 8px;
 }
 
 .plant .plantName{
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  font-size: 1.4em;
+  font-size: 1.3em;
+  text-decoration: underline rgb(43, 4, 4);
 
 }
 
@@ -54,11 +64,27 @@ body {
   padding-right: 10px;
 }
 
-.plantButton {
+button {
   border: 1px solid black;
   border-radius: 6px;
   margin: 5px;
   padding: 3px 10px;
+}
+
+.addButton {
+  background-color: #CCFFCC;
+  position:absolute;
+  top:20px;
+  left:20px;
+}
+
+.editButton {
+  background-color: rgb(209, 213, 255);
+}
+
+.deleteButton {
+  background-color: rgb(248, 198, 198);
+  margin-left: 200px;
 }
 
 .updateModal {
@@ -71,10 +97,34 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .updateModal input{
   width: 100%;
   border: 1px solid rgb(162, 189, 162);
   border-radius: 3px;
+  margin-bottom: 8px;
+}
+
+.details {
+  height: 50px;
+  width: 700px;
+}
+
+
+.detailItem {
+  background-color: #e0fde0;
+  border-bottom: 1px solid rgb(119, 119, 119);
+}
+
+.detailDate {
+  display: inline-block;
+  width:80px;
+  border-right: 1px solid rgb(119, 119, 119);
+  margin-right: 5px;
+}
+
+.detailNote {
+  display: inline-block;
 }

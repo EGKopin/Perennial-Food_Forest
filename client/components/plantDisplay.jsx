@@ -37,6 +37,9 @@
         key = {`Plant #${i}`}
         editPlant={props.editPlant}
         deletePlant={props.deletePlant}
+        getDetails={props.getDetails}
+        detailList={props.detailList}
+        //this is probably not the best way to pass it down, because I only want it for the ONE item
         />
     );
   }
@@ -45,7 +48,7 @@
      <div className="mainContainer">
         <div className='header'>
          <h1>Perennial Food Forest</h1> 
-        <button className='plantButton' onClick={() => {setOpenModal(true);
+        <button className='addButton' onClick={() => {setOpenModal(true);
           }}>Add Plant</button>
             {openModal && <AddPlant 
             getPlant={props.getPlant}

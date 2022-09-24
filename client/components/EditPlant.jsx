@@ -4,17 +4,17 @@ class EditPlant extends React.Component {
   constructor (props){
     super(props);
     this.state = {
-      name: '',
-      type: '',
-      scientific_name: '',
-      zones: '',
-      watering: '',
-      fruiting_branch: '',
-      planted_date: '',
-      size: '',
-      self_pollinating: '',
-      light_exposure: '',
-      hardiness_tempf: ''
+      name:  `${this.props.plantDetails.name}`,
+      type: `${this.props.plantDetails.type}`,
+      scientific_name: `${this.props.plantDetails.scientific_name}`,
+      zones: `${this.props.plantDetails.zones}`,
+      watering: `${this.props.plantDetails.watering}`,
+      fruiting_branch: `${this.props.plantDetails.fruiting_branch}`,
+      planted_date: `${this.props.plantDetails.planted_date}`,
+      size: `${this.props.plantDetails.size}`,
+      self_pollinating: `${this.props.plantDetails.self_pollinating}`,
+      light_exposure: `${this.props.plantDetails.light_exposure}`,
+      hardiness_tempf: `${this.props.plantDetails.hardiness_tempf}`
     };
     this.handleType = this.handleType.bind(this);
     this.handleName = this.handleName.bind(this);

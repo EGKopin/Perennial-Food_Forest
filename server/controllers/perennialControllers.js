@@ -22,28 +22,54 @@ perennialController.getAllPlants = async (req, res, next) => {
   };
 }
 
-perennialController.getPlant = async (req, res, next) => {
+//this will get all notes, and pruning and harvest info in the future
+perennialController.getDetails = async (req, res, next) => {
     const { id } = req.params; 
     try { 
       const queryString = `
-      SELECT *
-      FROM perennials
-      WHERE _id = $1
+      SELECT perennial_notes.date, perennial_notes.note
+      FROM perennials JOIN perennial_notes
+      ON perennials._id = perennial_notes.perennial_id
+      WHERE perennials._id = ${id}
       `
-      const params = [id];
-
-      const result = await db.query(queryString, params)
-      res.locals.plant = result.rows[0];
+      const result = await db.query(queryString)
+      res.locals.details = result.rows;
       return next();
     }
     catch (err) {
       return next({
-        log: `perennialController.getPlant: ERROR: ${err}`,
+        log: `perennialController.getDetails: ERROR: ${err}`,
         message: {
-          err: 'Error in perennialController.getPlant',
+          err: 'Error in perennialController.getDetails',
         },
       });
     };
+}
+
+perennialController.postNote = async (req, res, next) => {
+  const { id } = req.params;
+  const { date, note } = req.body;
+console.log(date, note)
+  try{
+    const queryString = `
+    INSERT INTO perennial_notes (date, note, perennial_id)
+    VALUES ($1, $2, $3)
+    Returning *
+    `
+    const params = [date, note, id];
+
+    const result = await db.query(queryString, params);
+    res.locals.note = result.rows[0];
+    return next ();
+  }
+  catch (err) {
+    return next({
+      log: `perennialController.postNote: ERROR: ${err}`,
+      message: {
+        err: 'Error in perennialController.postNote',
+      },
+    });
+  };
 }
 
 //WORKS!!! First to make it happen, baby
@@ -118,5 +144,6 @@ perennialController.deletePlant = async (req, res, next) => {
     });
   };
 }
+
 
 module.exports = perennialController;
