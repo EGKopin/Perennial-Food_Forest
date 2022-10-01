@@ -1,10 +1,9 @@
 const express = require ('express');
+const router = express.Router();
 
 const perennialController = require('../controllers/perennialControllers');
 
-const router = express.Router();
-
-//Plant CRUD functionality
+//Perennial CRUD functionality
 router.get('/', perennialController.getAllPlants, (req, res) => {
   return res.status(200).json(res.locals.plant)
 });

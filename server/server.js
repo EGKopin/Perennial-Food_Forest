@@ -1,18 +1,19 @@
 const express = require('express')
+const dotenv = require('dotenv').config()
 const cors = require('cors')
+const colors = require('colors')
 
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT;
 
-const apiRouter = require('./routes/api')
+const apiRouter = require('./routes/perennialApi')
 
 //handle all cors issues with the npm package
 app.use(cors());
-/**
- * handle parsing request body
- */
 
+
+/* handle parsing request body */
  app.use(express.json());
  app.use(express.urlencoded({ extended: true }));
 
@@ -20,20 +21,15 @@ app.use(cors());
  app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
-});
+  });
 
- /* Server test at intial endpoint
- */
-
+ /* Server test at intial endpoint */
 app.get('/', (req,res) => {
     res.json('Hello World! How are you?')
 });
 
-/*
-Route handler defined for all perennial queries
-*/
-
-app.use('/perennial', apiRouter);
+/* Route handler defined for all perennial queries */
+app.use('/api/perennials', apiRouter);
 
 
 // catch-all route handler for any requests to an unknown route
@@ -54,7 +50,7 @@ app.use((err, req, res, next) => {
 //starting the server
 
 app.listen(port, () => {
-    console.log('Server is listening on port 3000.')
+    console.log(`Server is listening on port ${port}.`.magenta.underline)
 });
 
 module.exports = app;

@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import PlantDisplay from './components/plantDisplay.jsx';
 import AddPlant from './components/AddPlant.jsx';
+import Header from './components/header.jsx';
 
 import './styles.css';
 
@@ -36,12 +37,12 @@ componentDidMount(){
 }
 
 componentDidUpdate() {
-  this.getPlant()
+  // this.getPlant()
 }
 
 getPlant(){
   // console.log('click');
-  fetch('http://localhost:3000/perennial')
+  fetch('http://localhost:3000/api/perennials')
     .then(res => res.json())
     .then(plants => {
       plants.sort((a,b) => a._id - b._id)
@@ -51,7 +52,7 @@ getPlant(){
 }
 
 getDetails(e){
-    fetch(`http://localhost:3000/perennial/${e.target.id}`)
+    fetch(`http://localhost:3000/api/perennials/${e.target.id}`)
     .then(res => res.json())
     .then(details => {
       details.sort((a,b) => a._id - b._id);
@@ -64,7 +65,7 @@ getDetails(e){
 
 editPlant(e){
  console.log(e.target.id)
-  fetch( `http://localhost:3000/perennial/${e.target.id}`, {
+  fetch( `http://localhost:3000/api/perennials/${e.target.id}`, {
     method:'PATCH',
     // mode: 'cors',
     body: JSON.stringify({
@@ -91,7 +92,7 @@ deletePlant(event){
   const toDelete = event.target.id
   const confirm = window.confirm('Do you really want to delete all your hard work?')
   if (confirm){
-  fetch(`http://localhost:3000/perennial/${toDelete}`, {
+  fetch(`http://localhost:3000/api/perennials/${toDelete}`, {
     method:'DELETE',
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
@@ -110,6 +111,9 @@ deletePlant(event){
 render() {
   return(
     <div className="router">
+      <><Header 
+      addPlant={this.addPlant}
+      /></>
       <main>
         <Routes>
           <Route exact path='/' element={
@@ -118,16 +122,13 @@ render() {
             editPlant={this.editPlant}
             deletePlant={this.deletePlant}
             plantList={this.state.plants}
-            addPlant={this.addPlant}
+            
             getDetails={this.getDetails}
             detailList={this.state.currentDetails}
             />
         }
           />
-          <Route path='add' element={<AddPlant 
-            addPlant={this.addPlant}
-            />
-          }/>
+          <Route path='/annuals' element={<AddPlant />}/>
         </Routes>
       </main>
     </div>

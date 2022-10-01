@@ -1,32 +1,32 @@
 import React from "react";
+import {useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 
-class AddPlant extends React.Component {
-  constructor (props){
-    super(props);
-    this.state = {
-      name: '',
-      type: '',
-      scientific_name: '',
-      zones: '',
-      watering: '',
-      fruiting_branch: '',
-      planted_date: '',
-      size: '',
-      self_pollinating: '',
-      light_exposure: '',
-      hardiness_tempf: ''
-    };
-    this.handleType = this.handleType.bind(this);
-    this.handleName = this.handleName.bind(this);
-    this.handleSciname = this.handleSciname.bind(this);
-    this.handleZones = this.handleZones.bind(this);
-    this.handleWatering = this.handleWatering.bind(this);
-    this.handleFruit = this.handleFruit.bind(this);
-    this.handleDate = this.handleDate.bind(this);
-    this.handleSize = this.handleSize.bind(this);
-    this.handlePollinating = this.handlePollinating.bind(this);
-    this.handleTemp = this.handleTemp.bind(this);
-    this.handleLight = this.handleLight.bind(this);
+function AddPlant() {
+  const [formData, setFormData] = useState({
+    name: '',
+    type: '',
+    scientific_name: '',
+    zones: '',
+    watering: '',
+    fruiting_branch: '',
+    planted_date: '',
+    size: '',
+    self_pollinating: '',
+    light_exposure: '',
+    hardiness_tempf: ''
+  })
+    // this.handleType = this.handleType.bind(this);
+    // this.handleName = this.handleName.bind(this);
+    // this.handleSciname = this.handleSciname.bind(this);
+    // this.handleZones = this.handleZones.bind(this);
+    // this.handleWatering = this.handleWatering.bind(this);
+    // this.handleFruit = this.handleFruit.bind(this);
+    // this.handleDate = this.handleDate.bind(this);
+    // this.handleSize = this.handleSize.bind(this);
+    // this.handlePollinating = this.handlePollinating.bind(this);
+    // this.handleTemp = this.handleTemp.bind(this);
+    // this.handleLight = this.handleLight.bind(this);
 
     this.addPlant = this.addPlant.bind(this);
   }
@@ -65,10 +65,14 @@ class AddPlant extends React.Component {
     this.setState({hardiness_tempf:event.target.value});
   }
 
+  onSubmit(e) {
+    e.preventDefault()
+  }
+
   //add a new plant and reset state values to empty strings
   addPlant(){
     console.log('add plant')
-    fetch('http://localhost:3000/perennial', {
+    fetch('http://localhost:3000/api/perennials', {
       method:'POST',
       mode: 'cors',
       body: JSON.stringify({
@@ -105,11 +109,13 @@ class AddPlant extends React.Component {
 
   render () {
     return (
-      <div className="updateModal">
+      <section className="updateModal">
         <p>Add a new plant:</p>
-        Name:
-        <input type="test" value ={this.state.name} onChange={this.handleName} />
-
+        {/* <form onSubmit={onSubmit}> */}
+          <div className="form-item">
+            <label>Name:</label>   
+            <input type="test" name="name" value ={this.state.name} onChange={this.handleName} />
+          </div>
         Scientific Name:
         <input type="test" value ={this.state.scientific_name} onChange={this.handleSciname} />
 
@@ -140,8 +146,9 @@ class AddPlant extends React.Component {
 
         
         <button className='plantButton'  onClick={this.addPlant} >Submit</button>
-        
-      </div>
+          </div>
+        {/* </form> */}
+      </section>
     )
   }
 }

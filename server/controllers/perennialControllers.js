@@ -2,6 +2,10 @@ const db = require('../models/perennialModels');
 
 const perennialController = {};
 
+
+// @desc Get perennial plants
+// @route GET /api/perennials
+// @access Public
 perennialController.getAllPlants = async (req, res, next) => {
   try { 
     const queryString = `
@@ -76,6 +80,9 @@ console.log(date, note)
 perennialController.addPlants = async (req, res, next) => {
   const { type, name, scientific_name, light_exposure, watering, zones, hardiness_tempf, self_pollinating, fruiting_branch, size, planted_date } = req.body; 
   try {
+    if (!name) {
+      return next({status: 400, message: 'The name must not be empty'})
+    }
     const queryString = `
     INSERT INTO perennials (type, name, scientific_name, light_exposure, watering, zones, hardiness_tempf, self_pollinating, fruiting_branch, size, planted_date)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
@@ -145,5 +152,5 @@ perennialController.deletePlant = async (req, res, next) => {
   };
 }
 
-
+//I can export all together as an object with methods, OR declare each function separately and export each function 
 module.exports = perennialController;
