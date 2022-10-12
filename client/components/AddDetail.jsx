@@ -1,4 +1,32 @@
 import React from "react";
+import { addDetail } from "../fetch/pNotesService";
+import { useState } from "react";
+
+const AddDetail2 = () => {
+  initialState = {
+    date: '',
+    note: '',
+  }
+
+  const [state, setState] = useState(initialState);
+
+  const updateVal = (e) => {
+    setState(state.name + e.target.value)
+  }
+
+  return (
+    <div className="updateModal">
+      <p>Add a new note:</p>
+      Date:
+      <input type="test" name='date' value ={this.state.date} onChange={this.handleDate} />
+      Note:
+      <input type="test" name='note' value ={this.state.note} onChange={this.handleNote} />
+          
+      <button className='plantButton'>Submit</button>
+      
+    </div>
+  )
+}
 
 class AddDetail extends React.Component {
   constructor (props){
@@ -21,33 +49,33 @@ class AddDetail extends React.Component {
   }
   
 
-  //add a new plant and reset state values to empty strings
-  addDetail(e){
-    console.log('add plant')
-    fetch(`http://localhost:3000/perennial/notes/${id}`, {
-      method:'POST',
-      mode: 'cors',
-      body: JSON.stringify({
-        date: `${this.state.date}`,
-        note: `${this.state.note}`,
-       }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    })
-    .then(res => res.json())
-    .then(addedDetail => {
-        let note = addedDetail;
-    })
-      .then(this.setState({
-        date: '',
-        note: '',
-      }),
-      // this.props.closeModal(false),
-      // this.props.getPlant()
-      )
-    .catch ((err) => console.log('error in addNote', err))
-  }
+  //add a new plant note and reset state values to empty strings
+  // addDetail(e){
+  //   console.log('add plant')
+  //   fetch(`http://localhost:3000/perennial/notes/${id}`, {
+  //     method:'POST',
+  //     mode: 'cors',
+  //     body: JSON.stringify({
+  //       date: `${this.state.date}`,
+  //       note: `${this.state.note}`,
+  //      }),
+  //     headers: {
+  //       'Content-type': 'application/json; charset=UTF-8',
+  //     },
+  //   })
+  //   .then(res => res.json())
+  //   .then(addedDetail => {
+  //       let note = addedDetail;
+  //   })
+  //     .then(this.setState({
+  //       date: '',
+  //       note: '',
+  //     }),
+  //     // this.props.closeModal(false),
+  //     // this.props.getPlant()
+  //     )
+  //   .catch ((err) => console.log('error in addNote', err))
+  // }
 
   render () {
     return (

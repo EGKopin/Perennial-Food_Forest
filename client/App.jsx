@@ -9,12 +9,45 @@
  * ************************************
  */
 
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import PlantDisplay from './components/plantDisplay.jsx';
 import AddPlant from './components/AddPlant.jsx';
+import { getPlant, deletePlant, editPlant } from './fetch/perennialService.js';
 
 import './styles.css';
+
+// const App = () => {
+  // let initialState = {
+  //   _id: [],
+  //   plants: [],
+  //   currentID: null,
+  //   currentDetails: null,
+  // }
+  // const [state, setState] = useState(initialState);
+
+//     return(
+//       <>
+//       <div className="router">
+//         test
+//         <main>
+//           {/* <Routes>
+//             <Route exact path='/' element={ */}
+//               <PlantDisplay />
+//           {/* } */}
+//             {/* />
+//             <Route path='add' element={<AddPlant 
+//               // addPlant={this.addPlant}
+//               />
+//             }/>
+//           </Routes> */}
+//         </main>
+//       </div>
+//       </>
+//     );
+  
+// }
+
 
 class App extends Component {
   constructor(props) {
@@ -30,6 +63,7 @@ class App extends Component {
     this.deletePlant = this.deletePlant.bind(this);
     this.getDetails = this.getDetails.bind(this);
 }
+
 
 componentDidMount(){
   this.getPlant()
